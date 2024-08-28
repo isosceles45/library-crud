@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createBook, updateBook } from "../slices/bookSlice";
+import { FaTrashAlt } from "react-icons/fa";
 
 const BookForm = ({ currentId, setCurrentId }) => {
     const [bookData, setBookData] = useState({
         title: "",
         author: "",
         isbn: "",
-        publishedYear: 2024,
+        publishedYear: new Date().getFullYear(),
         quantity: 0,
     });
 
     const dispatch = useDispatch();
     const books = useSelector((state) => state.books.books);
-    const book = currentId ? books.find((book) => book._id === currentId) : null;
+    const book = currentId
+        ? books.find((book) => book._id === currentId)
+        : null;
 
     useEffect(() => {
         if (book) setBookData(book);
@@ -34,7 +37,9 @@ const BookForm = ({ currentId, setCurrentId }) => {
             }
             console.log(changedFields);
             // Only dispatch update with changed fields
-            dispatch(updateBook({ id: currentId, updatedFields: changedFields }));
+            dispatch(
+                updateBook({ id: currentId, updatedFields: changedFields })
+            );
         } else {
             dispatch(createBook(bookData));
         }
@@ -55,12 +60,12 @@ const BookForm = ({ currentId, setCurrentId }) => {
 
     return (
         <form
-            className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+            className="bg-gray-900 text-white shadow-lg rounded-lg p-8 mb-6"
             onSubmit={handleSubmit}
         >
-            <div className="mb-4">
+            <div className="mb-6">
                 <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-gray-300 text-sm font-semibold mb-2"
                     htmlFor="title"
                 >
                     Title
@@ -68,7 +73,7 @@ const BookForm = ({ currentId, setCurrentId }) => {
                 <input
                     type="text"
                     id="title"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="bg-gray-800 border border-gray-600 rounded-lg w-full py-2 px-3 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     value={bookData.title}
                     onChange={(e) =>
                         setBookData({ ...bookData, title: e.target.value })
@@ -77,9 +82,9 @@ const BookForm = ({ currentId, setCurrentId }) => {
                 />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-6">
                 <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-gray-300 text-sm font-semibold mb-2"
                     htmlFor="author"
                 >
                     Author
@@ -87,7 +92,7 @@ const BookForm = ({ currentId, setCurrentId }) => {
                 <input
                     type="text"
                     id="author"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="bg-gray-800 border border-gray-600 rounded-lg w-full py-2 px-3 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     value={bookData.author}
                     onChange={(e) =>
                         setBookData({ ...bookData, author: e.target.value })
@@ -96,9 +101,9 @@ const BookForm = ({ currentId, setCurrentId }) => {
                 />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-6">
                 <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-gray-300 text-sm font-semibold mb-2"
                     htmlFor="isbn"
                 >
                     ISBN
@@ -106,7 +111,7 @@ const BookForm = ({ currentId, setCurrentId }) => {
                 <input
                     type="text"
                     id="isbn"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="bg-gray-800 border border-gray-600 rounded-lg w-full py-2 px-3 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     value={bookData.isbn}
                     onChange={(e) =>
                         setBookData({ ...bookData, isbn: e.target.value })
@@ -115,9 +120,9 @@ const BookForm = ({ currentId, setCurrentId }) => {
                 />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-6">
                 <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-gray-300 text-sm font-semibold mb-2"
                     htmlFor="publishedYear"
                 >
                     Published Year
@@ -125,7 +130,7 @@ const BookForm = ({ currentId, setCurrentId }) => {
                 <input
                     type="number"
                     id="publishedYear"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="bg-gray-800 border border-gray-600 rounded-lg w-full py-2 px-3 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     value={bookData.publishedYear}
                     onChange={(e) =>
                         setBookData({
@@ -137,9 +142,9 @@ const BookForm = ({ currentId, setCurrentId }) => {
                 />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-6">
                 <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-gray-300 text-sm font-semibold mb-2"
                     htmlFor="quantity"
                 >
                     Quantity
@@ -147,7 +152,7 @@ const BookForm = ({ currentId, setCurrentId }) => {
                 <input
                     type="number"
                     id="quantity"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="bg-gray-800 border border-gray-600 rounded-lg w-full py-2 px-3 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     value={bookData.quantity}
                     onChange={(e) =>
                         setBookData({
@@ -161,17 +166,17 @@ const BookForm = ({ currentId, setCurrentId }) => {
 
             <div className="flex items-center justify-between">
                 <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="submit"
+                    className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5"
                 >
                     {currentId ? "Update Book" : "Add Book"}
                 </button>
                 <button
-                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="button"
+                    className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 flex items-center justify-center"
                     onClick={clear}
                 >
-                    Clear
+                    <FaTrashAlt />
                 </button>
             </div>
         </form>

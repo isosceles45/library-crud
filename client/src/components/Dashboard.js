@@ -13,13 +13,20 @@ const Dashboard = () => {
     }, [dispatch]);
 
     return (
-        <div className="container mx-auto p-4">
-            <h1 className="text-3xl font-bold mb-6 text-center">
-                Library Dashboard
-            </h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <BookForm currentId={currentId} setCurrentId={setCurrentId} />
-                <BookList setCurrentId={setCurrentId} />
+        <div className="bg-gray-900 min-h-screen p-6">
+            <div class="flex justify-center">
+                <h1 class="text-5xl mb-6 font-bold dark:text-white">Library Dashboard</h1>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="lg:col-span-1 bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <BookForm
+                        currentId={currentId}
+                        setCurrentId={setCurrentId}
+                    />
+                </div>
+                <div className="lg:col-span-2 bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <BookList setCurrentId={setCurrentId} />
+                </div>
             </div>
         </div>
     );
