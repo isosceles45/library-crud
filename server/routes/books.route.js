@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get("/", getAllBooks);
 router.post("/", validateBook(), validate, createBook);
-router.patch("/:id", validateBook(true), validate, updateBook);
+router.put("/:id", validateBook(true), validate, updateBook);
 router.delete("/:id", deleteBook);
 
 export default router;
