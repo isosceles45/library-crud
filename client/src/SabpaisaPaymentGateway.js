@@ -16,11 +16,21 @@ function SabpaisaPaymentGateway(props) {
         payerMobile,
         amount,
         payerAddress,
+        setPaymentSuccess, // New prop to handle payment success
     } = props;
 
     useEffect(() => {
         setIsOpen(props.isOpen);
     }, [props.isOpen]);
+
+    // Function to handle the payment result callback
+    const handlePaymentResult = (result) => {
+        if (result.status === "success") {
+            setPaymentSuccess(true); // Set payment success to true on success
+        } else {
+            alert("Payment failed. Please try again."); // Handle failure case
+        }
+    };
 
     return (
         <div>
@@ -50,6 +60,7 @@ function SabpaisaPaymentGateway(props) {
                 mcc="" // MCC if required
                 label={"Production"}
                 env={"stag"}
+                onPaymentResult={handlePaymentResult} // Payment result callback
             />
         </div>
     );
