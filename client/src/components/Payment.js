@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import SabpaisaPaymentGateway from "../SabpaisaPaymentGateway";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const Payment = ({ setPaymentSuccess }) => {
+const Payment = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [payerName, setPayerName] = useState("");
     const [payerEmail, setPayerEmail] = useState("");
     const [payerMobile, setPayerMobile] = useState("");
     const [payerAddress, setPayerAddress] = useState("");
-    const [amount, setAmount] = useState(500);
+    const amount = 500;
 
     const clientCode = process.env.REACT_APP_CLIENT_CODE;
     const transUserName = process.env.REACT_APP_TRANS_USER_NAME;
@@ -35,13 +35,12 @@ const Payment = ({ setPaymentSuccess }) => {
     useEffect(() => {
         const params = getQueryParams(location.search);
         if (params.status === "SUCCESS") {
-            setPaymentSuccess(true);
             localStorage.setItem("paymentSuccess", "true");
             navigate("/dashboard");
         } else if (params.status) {
             alert("Payment failed. Please try again.");
         }
-    }, [location, navigate, setPaymentSuccess]);
+    }, [location, navigate]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
